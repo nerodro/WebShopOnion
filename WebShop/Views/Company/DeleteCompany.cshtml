@@ -1,0 +1,12 @@
+﻿@model string
+@using TestOnion.Models
+
+
+<form asp-action="DeleteCompany" role="form">
+
+
+    <div class="modal-body form-horizontal">
+        Are you want to delete @Model?
+    </div>
+    <input type="submit" value="Удалить" class="btn btn-outline-dark" />
+</form>

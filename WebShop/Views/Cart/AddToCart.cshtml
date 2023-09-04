@@ -1,0 +1,30 @@
+﻿@model CartViewModel
+@using TestOnion.Models
+
+<form asp-action="AddToCart" role="form">
+
+    <div class="modal-body form-horizontal">
+        <div class="row">
+            <input asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="ProductName" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="ProductName" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductId" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="ProductId" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserId" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="UserId" class="form-control" />
+                </div>
+            </div>
+            <input type="submit" value="Создать" class="btn btn-outline-dark" />
+        </div>
+    </div>
+</form>
