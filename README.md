@@ -2,6 +2,22 @@
 <h2 align="center">Это мой проект, по созданию интернет магазина с использованием луковой архитектуры
 <img src="https://github.com/blackcater/blackcater/raw/main/images/Hi.gif" height="32"/></h1>
 
+<h3>Описание проекта</h3>
+
+Интернет магазин
+
+<h4>Предварительные требования</h4>
+
+ * .NET 7
+ 
+ * ASP.NET
+ * PostgreSQL
+
+Данный проект реализован на базе .NET 7 и ASP.NET , с использованием луковой архитектуры в связке с архитектурным паттерном MVC.
+В качестве базы данных используется PostregsSQL, взаимодействие с БД реализовано посредством использования EntityFramework. 
+Проект так же доступен для установки из Docker образа опубликованного на DockerHub. В качестве системы метрик используется Prometheus + Graphana.
+За работу с сообщениями отвечает библиотека SignalR, в качестве брокера сообщений был выбран RabbitMQ. Front-end реализован с помощью TS в связке с Angular
+
 
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 ![.Net](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
