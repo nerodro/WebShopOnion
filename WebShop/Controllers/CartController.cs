@@ -37,7 +37,8 @@ namespace WebShop.Controllers
                 {
                     CartViewModel cart = new CartViewModel
                     {
-                        ProductId = (int)u.ProductsId
+                        ProductId = (int)u.ProductsId,
+                        ProductName = u.ProductName,
                     };
                     model.Add(cart);
                 });
@@ -49,16 +50,39 @@ namespace WebShop.Controllers
         [HttpGet]
         public ActionResult AddToCart(int? Id)
         {
+            string Name = User.FindFirst(ClaimTypes.Name).Value;
             CartViewModel cart = new CartViewModel();
-
+            if(Id.HasValue && Id != 0)
+            {
+                Products products = _product.Get((long)Id);
+                cart.ProductName = products.ProductName;
+                cart.UserId = _user.GetUserViaName(Name);
+                cart.ProductId = (int)products.Id;
+                cart.ProductName = products.ProductName;
+            }
             //return RedirectToAction("Index", "Cart");
             return View("AddToCart", cart);
         }
 
-       
+        //[HttpPost]
+        //public ActionResult EditCompany(CompanyViewModel model)
+        //{
+        //    Company company = _company.Get(model.Id);
+        //    company.CompanyNamme = model.CompanyNamme;
+        //    company.ModifiedDate = DateTime.UtcNow;
+        //    company.CompanyIdentity = model.CompanyIdentity;
+        //    _company.Update(company);
+        //    if (company.Id > 0)
+        //    {
+        //        return RedirectToAction("index");
+        //    }
+        //    return View(model);
+        //}
+
         [HttpPost]
-        public async Task<IActionResult> AddToCart(CartViewModel model, int? Id)
+        public async Task<IActionResult> AddToCart(CartViewModel model)
         {
+
             //string? id = User.FindFirstValue(ClaimTypes.NameIdentifier);
             //int id2 = Convert.ToInt32(id);
             //Products product = context.Products.Find(Id);
@@ -66,6 +90,7 @@ namespace WebShop.Controllers
             {
                 ProductsId = model.ProductId,
                 UserProfileId = model.UserId,
+                ProductName= model.ProductName,
                 //ProductId = model.ProductId,
             };
             _cart.AddProductToCart(cart);

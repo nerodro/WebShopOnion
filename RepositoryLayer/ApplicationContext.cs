@@ -20,6 +20,10 @@ namespace RepositoryLayer
             //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=WebShop2;Username=postgres;Password=nerodro26;");
+        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

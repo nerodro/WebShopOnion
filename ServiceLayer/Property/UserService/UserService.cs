@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RepositoryLayer.Infrascructure.User;
 using DomainLayer;
+using RepositoryLayer.Infrascructure.Cart;
 
 namespace ServiceLayer.Property.UserService
 {
@@ -27,6 +28,12 @@ namespace ServiceLayer.Property.UserService
         public User GetUser(long id)
         {
             return userControlLogic.Get(id);
+        }
+        public int GetUserViaName(string name)
+        {
+            var user = userControlLogic.GetAll().Where(x => x.UserName == name).FirstOrDefault();
+            int id = (int)user.Id;
+            return id;
         }
 
         public void CreateUser(User user)
