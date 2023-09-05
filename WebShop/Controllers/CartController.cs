@@ -64,34 +64,16 @@ namespace WebShop.Controllers
             return View("AddToCart", cart);
         }
 
-        //[HttpPost]
-        //public ActionResult EditCompany(CompanyViewModel model)
-        //{
-        //    Company company = _company.Get(model.Id);
-        //    company.CompanyNamme = model.CompanyNamme;
-        //    company.ModifiedDate = DateTime.UtcNow;
-        //    company.CompanyIdentity = model.CompanyIdentity;
-        //    _company.Update(company);
-        //    if (company.Id > 0)
-        //    {
-        //        return RedirectToAction("index");
-        //    }
-        //    return View(model);
-        //}
 
         [HttpPost]
         public async Task<IActionResult> AddToCart(CartViewModel model)
         {
-
-            //string? id = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //int id2 = Convert.ToInt32(id);
-            //Products product = context.Products.Find(Id);
             Cart cart = new Cart
             {
                 ProductsId = model.ProductId,
                 UserProfileId = model.UserId,
                 ProductName= model.ProductName,
-                //ProductId = model.ProductId,
+                CountProduct = 1,
             };
             _cart.AddProductToCart(cart);
             if (cart.Id > 0)
@@ -99,92 +81,45 @@ namespace WebShop.Controllers
                 return RedirectToAction("Index", "Cart");
             }
             return View(model);
-            //return RedirectToAction("Index", "Cart");
         }
 
-        //public ActionResult EditCompany(int? id)
-        //{
-        //    CompanyViewModel model = new CompanyViewModel();
-        //    if (id.HasValue && id != 0)
-        //    {
-        //        Company company = _company.Get(id.Value);
-        //        model.CompanyIdentity = company.CompanyIdentity;
-        //        model.CompanyNamme = company.CompanyNamme;
-        //    }
-        //    return View("EditCompany", model);
-        //}
+        public ActionResult EditCart(int? id)
+        {
+            CartViewModel model = new CartViewModel();
+            if (id.HasValue && id != 0)
+            {
+                Cart cart = _cart.Get(id.Value);
+                model.Count = model.Count;
+            }
+            return View("EditCart", model);
+        }
 
-        //[HttpPost]
-        //public ActionResult EditCompany(CompanyViewModel model)
-        //{
-        //    Company company = _company.Get(model.Id);
-        //    company.CompanyNamme = model.CompanyNamme;
-        //    company.ModifiedDate = DateTime.UtcNow;
-        //    company.CompanyIdentity = model.CompanyIdentity;
-        //    _company.Update(company);
-        //    if (company.Id > 0)
-        //    {
-        //        return RedirectToAction("index");
-        //    }
-        //    return View(model);
-        //}
+        [HttpPost]
+        public ActionResult EditCart(CartViewModel model)
+        {
+            Cart cart = _cart.Get(model.Id);
+            cart.CountProduct = model.Count;
+            _cart.EditCount(cart);
+            if (cart.Id > 0)
+            {
+                return RedirectToAction("index");
+            }
+            return View(model);
+        }
 
-        //[HttpGet]
-        //public ActionResult DeleteCompany(int id)
-        //{
-        //    Company company = _company.Get(id);
-        //    string name = $"{company.CompanyNamme} {company.CompanyIdentity}";
-        //    return View("DeleteCompany", name);
-        //}
+        [HttpGet]
+        public ActionResult DeleteProductFromCart(int id)
+        {
+            Cart cart = _cart.Get(id);
+            string name = $"{cart.ProductName} {cart.CountProduct}";
+            return View("DeleteCompany", name);
+        }
 
-        //[HttpPost]
-        //public ActionResult DeleteCompany(long id)
-        //{
-        //    _company.Delete(id);
-        //    return RedirectToAction("Index");
-        //}
-        //[HttpGet]
-        //public ActionResult CompanyProfile(int? id)
-        //{
-        //    CompanyViewModel model = new CompanyViewModel();
-        //    if (id.HasValue && id != 0)
-        //    {
-        //        Company company = _company.Get(id.Value);
-        //        model.CompanyIdentity = company.CompanyIdentity;
-        //        model.CompanyNamme = company.CompanyNamme;
-        //    }
-        //    return View("CompanyProfile", model);
-        //}
-        //[HttpPost]
-        //public ActionResult CompanyProfile(CompanyViewModel model)
-        //{
-        //    Company company = _company.Get(model.Id);
-        //    company.CompanyIdentity = model.CompanyIdentity;
-        //    company.CompanyNamme = model.CompanyNamme;
-        //    return View(model);
-        //}
-        //[HttpPost]
-        //public ActionResult AddToCart(CartViewModel model)
-        //{
-        //    string? id = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    int id2 = Convert.ToInt32(id);
-        //    Cart cart = new Cart
-        //    {
-        //        UserProfileId = id2,
-        //        ProductId = model.ProductId,
-        //    };
-        //    //Company company1 = new Company
-        //    //{
-        //    //    CompanyNamme = company.CompanyNamme,
-        //    //    CompanyIdentity = company.CompanyIdentity,
-        //    //};
-        //    //_company.Create(company1);
-        //    _cart.AddProductToCart(cart);
-        //    if (cart.Id > 0)
-        //    {
-        //        return RedirectToAction("index");
-        //    }
-        //    return View(model);
-        //}
+        [HttpPost]
+        public ActionResult DeleteProductFromCart(long id)
+        {
+            _cart.DeleteFromCart(id);
+            return RedirectToAction("Index");
+        }
     }
 }
