@@ -1,6 +1,4 @@
-﻿using DomainLayer;
-
-namespace DomainLayer
+﻿namespace DomainLayer.Models
 {
     public class Role : BaseEntity
     {

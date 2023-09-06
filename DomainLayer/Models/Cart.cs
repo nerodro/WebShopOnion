@@ -1,9 +1,7 @@
-﻿using DomainLayer;
-
-namespace DomainLayer
+﻿namespace DomainLayer.Models
 {
     public class Cart : BaseEntity
-    { 
+    {
         public long UserProfileId { get; set; }
         public virtual UserProfile UserProfile { get; set; }
         //public Cart()

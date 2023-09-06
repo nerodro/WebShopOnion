@@ -1,4 +1,4 @@
-﻿using DomainLayer;
+﻿using DomainLayer.Models;
 using RepositoryLayer.Infrascructure.User;
 using System;
 using System.Collections.Generic;

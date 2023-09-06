@@ -1,4 +1,4 @@
-﻿using DomainLayer;
+﻿using DomainLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +15,6 @@ namespace ServiceLayer.Property.CartService
         void EditCount(Cart cart);
         void DeleteFromCart(long id);
         Cart Get(long id);
+        void DeleteAll(long id);
     }
 }

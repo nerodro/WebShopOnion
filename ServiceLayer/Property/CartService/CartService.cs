@@ -1,5 +1,4 @@
-﻿using DomainLayer;
-using RepositoryLayer.Infrascructure.Company;
+﻿using RepositoryLayer.Infrascructure.Company;
 using RepositoryLayer.Infrascructure.Products;
 using RepositoryLayer;
 using System;
@@ -13,6 +12,7 @@ using RepositoryLayer.Infrascructure.User;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using DomainLayer.Models;
 
 namespace ServiceLayer.Property.CartService
 {
@@ -35,10 +35,8 @@ namespace ServiceLayer.Property.CartService
         {
             return _cart.GetAllCart();
         }
-        public IEnumerable<Cart> GetProductInCart(/*long Id*/string name)
+        public IEnumerable<Cart> GetProductInCart(string name)
         {
-            //string? id = User(ClaimTypes.NameIdentifier);
-            //int id2 = Convert.ToInt32(id);
             var user = _userLogic.GetAll().Where(x => x.UserName == name).FirstOrDefault();
             List<Cart> cart = (List<Cart>)_cart.GetAllCart().Where(x => x.UserProfileId == user.Id).ToList();
             return cart;
@@ -59,14 +57,14 @@ namespace ServiceLayer.Property.CartService
 
         public void DeleteFromCart(long id)
         {
-            //List<Products> product = (List<Products>)_products.GetAll().Where(x => x.CompanyId == id).ToList();
-            //if (product != null)
-            //{
-            //    _products.RemoveAll(product);
-            //}
             Cart cart = _cart.Get(id);
             _cart.DeleteFromCart(cart);
             _cart.SaveChanges();
+        }
+        public void DeleteAll(long id)
+        {
+            List<Cart> carts = _context.Cart.Where(x => x.ProductsId == id).ToList();
+            _cart.RemoveAll(carts);
         }
     }
 }

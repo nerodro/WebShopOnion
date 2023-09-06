@@ -1,29 +1,30 @@
 ﻿using DomainLayer;
 using Microsoft.EntityFrameworkCore;
+using RepositoryLayer.Infrascructure.Cart;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepositoryLayer.Infrascructure.Cart
+namespace RepositoryLayer.Infrascructure.Categories
 {
-    public class CartLogic<T> : ICart<T> where T : BaseEntity
+    public class CategoriesLogic<T> : ICategories<T> where T : BaseEntity
     {
         private readonly ApplicationContext context;
         private DbSet<T> entities;
         string errorMessage = string.Empty;
 
-        public CartLogic(ApplicationContext context)
+        public CategoriesLogic(ApplicationContext context)
         {
             this.context = context;
             entities = context.Set<T>();
         }
-        public IEnumerable<T> GetCart(/*long Id*/)
+        public IEnumerable<T> GetAllCategories()
         {
             return entities.AsEnumerable();
         }
-        public void AddToCart(T entity)
+        public void AddCategory(T entity)
         {
             if (entity == null)
             {
@@ -33,7 +34,7 @@ namespace RepositoryLayer.Infrascructure.Cart
             context.SaveChanges();
         }
 
-        public void EditCount(T entity)
+        public void EditCategory(T entity)
         {
             if (entity == null)
             {
@@ -42,7 +43,7 @@ namespace RepositoryLayer.Infrascructure.Cart
             context.SaveChanges();
         }
 
-        public void DeleteFromCart(T entity)
+        public void DeleteCategory(T entity)
         {
             if (entity == null)
             {
@@ -51,7 +52,7 @@ namespace RepositoryLayer.Infrascructure.Cart
             entities.Remove(entity);
             context.SaveChanges();
         }
-        public void RemoveFromCart(T entity)
+        public void RemoveCategory(T entity)
         {
             if (entity == null)
             {

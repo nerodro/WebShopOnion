@@ -17,5 +17,6 @@ namespace RepositoryLayer.Infrascructure.Cart
         void RemoveFromCart(T entity);
         T Get(long id);
         void SaveChanges();
+        void RemoveAll(List<T> entity);
     }
 }

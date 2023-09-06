@@ -1,12 +1,11 @@
-﻿using DomainLayer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RepositoryLayer.Infrascructure.User;
-using DomainLayer;
 using RepositoryLayer.Infrascructure.Cart;
+using DomainLayer.Models;
 
 namespace ServiceLayer.Property.UserService
 {

@@ -1,4 +1,4 @@
-﻿using DomainLayer;
+﻿using DomainLayer.Models;
 
 namespace ServiceLayer.Property.UserService
 {

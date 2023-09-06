@@ -1,6 +1,4 @@
-﻿using DomainLayer;
-
-namespace DomainLayer
+﻿namespace DomainLayer.Models
 {
     public class Products : BaseEntity
     {
@@ -17,9 +15,7 @@ namespace DomainLayer
         //    Company = new List<Company>();
         //}
         public virtual List<Cart> Cart { get; set; }
-        public Products()
-        {
-            Cart = new List<Cart>();
-        }
+        public int CategorysId { get; set; }
+        public virtual Categories Categories { get; set; }
     }
 }

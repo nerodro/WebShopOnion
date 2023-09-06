@@ -1,4 +1,4 @@
-﻿using DomainLayer;
+﻿using DomainLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer;
 using RepositoryLayer.Infrascructure.Company;
@@ -37,8 +37,10 @@ namespace WebShop.Controllers
                 {
                     CartViewModel cart = new CartViewModel
                     {
+                        Id = u.Id,
                         ProductId = (int)u.ProductsId,
                         ProductName = u.ProductName,
+                        Count = u.CountProduct
                     };
                     model.Add(cart);
                 });
@@ -82,14 +84,14 @@ namespace WebShop.Controllers
             }
             return View(model);
         }
-
+        [HttpGet]
         public ActionResult EditCart(int? id)
         {
             CartViewModel model = new CartViewModel();
             if (id.HasValue && id != 0)
             {
                 Cart cart = _cart.Get(id.Value);
-                model.Count = model.Count;
+                model.Count = cart.CountProduct;
             }
             return View("EditCart", model);
         }
@@ -112,7 +114,7 @@ namespace WebShop.Controllers
         {
             Cart cart = _cart.Get(id);
             string name = $"{cart.ProductName} {cart.CountProduct}";
-            return View("DeleteCompany", name);
+            return View("DeleteProductFromCart", name);
         }
 
         [HttpPost]

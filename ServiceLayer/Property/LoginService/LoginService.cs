@@ -1,4 +1,4 @@
-﻿using DomainLayer;
+﻿using DomainLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using RepositoryLayer;
 using RepositoryLayer.Infrascructure.User;

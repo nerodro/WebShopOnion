@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace DomainLayer
+namespace DomainLayer.Models
 {
     public class UserProfile : BaseEntity
     {
@@ -23,7 +23,7 @@ namespace DomainLayer
         public virtual User User { get; set; }
         public virtual List<Cart> Cart { get; set; }
 
-        public UserProfile() 
+        public UserProfile()
         {
             Cart = new List<Cart>();
         }

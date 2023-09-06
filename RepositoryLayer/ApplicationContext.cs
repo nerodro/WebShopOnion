@@ -1,4 +1,6 @@
 ﻿using DomainLayer;
+using DomainLayer.Maps;
+using DomainLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,7 @@ namespace RepositoryLayer
         public DbSet<Company> Company { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<Cart> Cart { get; set; }
+        public DbSet<Categories> Categories { get; set; }
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
             //Database.EnsureDeleted();
@@ -32,6 +35,7 @@ namespace RepositoryLayer
             new CompanyMap(modelBuilder.Entity<Company>());
             new ProductMap(modelBuilder.Entity <Products>());
             new CartMap(modelBuilder.Entity<Cart>());
+            new CategoriesMap(modelBuilder.Entity<Categories>());
             new UserProfileMap(modelBuilder.Entity<UserProfile>());
 
 

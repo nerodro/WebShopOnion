@@ -1,5 +1,4 @@
-﻿using DomainLayer;
-using RepositoryLayer.Infrascructure.Company;
+﻿using RepositoryLayer.Infrascructure.Company;
 using RepositoryLayer.Infrascructure.Products;
 using RepositoryLayer;
 using System;
@@ -7,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RepositoryLayer.Infrascructure.Cart;
+using DomainLayer.Models;
 
 namespace ServiceLayer.Property.ProductServce
 {
@@ -14,11 +15,13 @@ namespace ServiceLayer.Property.ProductServce
     {
         private IProducts<Products> _products;
         private ICompany<Company> _company;
+        private ICart<Cart> _cart;
         private readonly ApplicationContext _context;
-        public ProductService(IProducts<Products> products, ICompany<Company> company)
+        public ProductService(IProducts<Products> products, ICompany<Company> company, ICart<Cart> cart)
         {
             this._company = company;
             this._products = products;
+            this._cart = cart;
         }
 
         public IEnumerable<Products> GetAll()
@@ -47,8 +50,14 @@ namespace ServiceLayer.Property.ProductServce
 
         public void Delete(long id)
         {
+            List<Cart> cart = (List<Cart>)_cart.GetAllCart().Where(x => x.ProductsId == id).ToList();
+            if (cart != null)
+            {
+                _cart.RemoveAll(cart);
+            }
             Products product = _products.Get(id);
             _products.Remove(product);
+            _products.SaveChanges();
         }
         public void DeleteAll(long id)
         {
