@@ -9,11 +9,11 @@ namespace ServiceLayer.Property.Category
 {
     public interface ICategoryService
     {
-        IEnumerable<Categories> GetAll();
-        IEnumerable<Products> GetAllProduct(long id);
-        Categories Get(long id);
-        void Create(Categories categories);
-        void Update(Categories categories);
+        IEnumerable<DomainLayer.Models.Category> GetAll();
+        IEnumerable<Products> GetAllProduct(int id);
+        DomainLayer.Models.Category Get(long id);
+        void Create(DomainLayer.Models.Category categories);
+        void Update(DomainLayer.Models.Category categories);
         void Delete(long id);
     }
 }

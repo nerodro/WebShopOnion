@@ -14,5 +14,6 @@ namespace WebShop.Models
         public int Price { get; set; } = 0;
         public long CompanyId { get; set; }
         public string CompanyName { get; set; } = null!;
+        public int CategoryId { get; set; } = 0!;
     }
 }

@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer;
+using ServiceLayer.Property.Category;
 using ServiceLayer.Property.UserProfileService;
 using ServiceLayer.Property.UserService;
 using System.Data;
 using TestOnion.Models;
+using WebShop.Models;
 
 namespace WebShop.Controllers
 {
@@ -13,17 +15,19 @@ namespace WebShop.Controllers
     {
         private readonly IUserService userService;
         private readonly IUserProfileService userProfileService;
+        private readonly ICategoryService categoryService;
         private ApplicationContext context;
 
-        public UserController(IUserService userService, IUserProfileService userProfileService)
+        public UserController(IUserService userService, IUserProfileService userProfileService, ICategoryService category)
         {
             this.userService = userService;
             this.userProfileService = userProfileService;
+            this.categoryService = category;
         }
 
         [HttpGet]
         [Authorize(Roles = "Admin, Moder,User")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             List<UserViewModel> model = new List<UserViewModel>();
             if (userProfileService != null)
@@ -41,8 +45,26 @@ namespace WebShop.Controllers
                     model.Add(user);
                 });
             }
-
-            return View(model);
+            List<CategoryViewModel> categories = new List<CategoryViewModel>();
+            if (categoryService != null)
+            {
+                categoryService.GetAll().ToList().ForEach(f =>
+                {
+                    Category category = categoryService.Get(f.Id);
+                    CategoryViewModel viewModel = new CategoryViewModel
+                    {
+                        Id = f.Id,
+                        CategoryName = f.CategoryName
+                    };
+                    categories.Add(viewModel);
+                });
+            }
+            //ViewData["categories"] = categories;
+            MultiViewModel multi = new MultiViewModel();
+            multi.UserViewModels = model;
+            multi.CategoryViewModels = categories;
+            //var tuple = new Tuple<List<UserViewModel>, List<CategoryViewModel>>((List<UserViewModel>)userService.GetUsers(), (List<CategoryViewModel>)categoryService.GetAll());
+            return View(multi);
         }
 
         [HttpGet]

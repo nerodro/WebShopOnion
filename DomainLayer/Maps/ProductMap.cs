@@ -19,6 +19,7 @@ namespace DomainLayer.Maps
             entityTypeBuilder.Property(x => x.Price).IsRequired();
             entityTypeBuilder.Property(x => x.ProductDescription).IsRequired();
             entityTypeBuilder.Property(x => x.Photos);
+            entityTypeBuilder.Property(x => x.CategoryId).IsRequired();
             //entityTypeBuilder.HasOne(t => t.Cart).WithOne(u => u.Products).HasForeignKey<Cart>(x => x.ProductId);
         }
     }

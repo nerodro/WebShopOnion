@@ -35,7 +35,8 @@ namespace WebShop.Controllers
                         ProductNumber = u.ProductNumber,
                         Price = u.Price,
                         ProductDescription = u.ProductDescription,
-                        CompanyName = company.CompanyNamme
+                        CompanyName = company.CompanyNamme,
+                        CategoryId = (int)u.CategoryId
                     };
                     model.Add(product);
                 });
@@ -62,6 +63,7 @@ namespace WebShop.Controllers
                 Price = model.Price,
                 ProductDescription = model.ProductDescription,
                 ProductNumber = model.ProductNumber,
+                CategoryId = model.CategoryId
             };
             _product.Create(products);
             if (products.Id > 0)

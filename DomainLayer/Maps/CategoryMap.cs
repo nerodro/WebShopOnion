@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Maps
 {
-    public class CategoriesMap
+    public class CategoryMap
     {
-        public CategoriesMap(EntityTypeBuilder<Categories> entityTypeBuilder) 
+        public CategoryMap(EntityTypeBuilder<Category> entityTypeBuilder) 
         {
             entityTypeBuilder.HasKey(x => x.Id);
             entityTypeBuilder.Property(x => x.CategoryName).IsRequired();

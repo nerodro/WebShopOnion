@@ -14,41 +14,41 @@ namespace ServiceLayer.Property.Category
     public class CategoryService : ICategoryService
     {
         private IProducts<Products> _products;
-        private ICategories<Categories> _categoryService;
+        private ICategories<DomainLayer.Models.Category> _categoryService;
         private readonly ApplicationContext _context;
-        public CategoryService(IProducts<Products> products, ICategories<Categories> categories)
+        public CategoryService(IProducts<Products> products, ICategories<DomainLayer.Models.Category> categories)
         {
             this._products = products;
             this._categoryService = categories;
         }
 
-        public IEnumerable<Products> GetAllProduct(long Id)
+        public IEnumerable<Products> GetAllProduct(int Id)
         {
-            return _context.Products.Where(x => x.CategorysId == Id);
+            return _products.GetAll().Where(x => x.CategoryId == Id);
         }
 
-        public IEnumerable<Categories> GetAll()
+        public IEnumerable<DomainLayer.Models.Category> GetAll()
         {
             return _categoryService.GetAllCategories();
         }
 
-        public Categories Get(long id)
+        public DomainLayer.Models.Category Get(long id)
         {
             return _categoryService.Get(id);
         }
 
-        public void Create(Categories categories)
+        public void Create(DomainLayer.Models.Category categories)
         {
             _categoryService.AddCategory(categories);
         }
-        public void Update(Categories categories)
+        public void Update(DomainLayer.Models.Category categories)
         {
             _categoryService.EditCategory(categories);
         }
 
         public void Delete(long id)
         {
-            Categories categories = _categoryService.Get(id);
+            DomainLayer.Models.Category categories = _categoryService.Get(id);
             _categoryService.DeleteCategory(categories);
             _categoryService.SaveChanges();
         }

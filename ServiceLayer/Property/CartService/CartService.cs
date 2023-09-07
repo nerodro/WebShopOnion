@@ -1,17 +1,7 @@
-﻿using RepositoryLayer.Infrascructure.Company;
-using RepositoryLayer.Infrascructure.Products;
+﻿using RepositoryLayer.Infrascructure.Products;
 using RepositoryLayer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RepositoryLayer.Infrascructure.Cart;
-using ServiceLayer.Property.UserProfileService;
 using RepositoryLayer.Infrascructure.User;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using DomainLayer.Models;
 
 namespace ServiceLayer.Property.CartService
@@ -21,7 +11,6 @@ namespace ServiceLayer.Property.CartService
         private ICart<Cart> _cart;
         private IProducts<Products> _products;
         private IUserLogic<User> _userLogic;
-        //private IUserLogic<User> _userprofile;
         private readonly ApplicationContext _context;
         public CartService(IProducts<Products> products, ICart<Cart> cart, IUserLogic<User> user)
         {
@@ -29,7 +18,6 @@ namespace ServiceLayer.Property.CartService
             this._products = products;
             this._userLogic = user;
         }
-
 
         public IEnumerable<Cart> GetAll()
         {
