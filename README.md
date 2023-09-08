@@ -16,7 +16,7 @@
 Данный проект реализован на базе .NET 7 и ASP.NET , с использованием луковой архитектуры в связке с архитектурным паттерном MVC.
 В качестве базы данных используется PostregsSQL, взаимодействие с БД реализовано посредством использования EntityFramework. 
 Проект так же доступен для установки из Docker образа опубликованного на DockerHub. В качестве системы метрик используется Prometheus + Graphana.
-За работу с сообщениями отвечает библиотека SignalR, в качестве брокера сообщений был выбран RabbitMQ. Front-end реализован с помощью TS в связке с Angular
+За работу с сообщениями отвечает библиотека SignalR. Front-end реализован с помощью TS в связке с Angular
 
 
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
@@ -26,7 +26,6 @@
 ![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![Grafana](https://img.shields.io/badge/grafana-%23F46800.svg?style=for-the-badge&logo=grafana&logoColor=white)
-![RabbitMQ](https://img.shields.io/badge/Rabbitmq-FF6600?style=for-the-badge&logo=rabbitmq&logoColor=white)
 
 
 
