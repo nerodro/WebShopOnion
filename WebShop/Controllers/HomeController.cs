@@ -45,6 +45,10 @@ namespace WebShop.Controllers
         {
             return View();
         }
+        public IActionResult Chat()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {

@@ -1,6 +1,7 @@
 ﻿using DomainLayer.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using RepositoryLayer;
 using ServiceLayer.Property.Category;
 using ServiceLayer.Property.UserProfileService;
@@ -71,6 +72,8 @@ namespace WebShop.Controllers
         public ActionResult AddUser()
         {
             UserViewModel model = new UserViewModel();
+            SelectList roles = new SelectList(context.Role, "Id", "Name");
+            ViewBag.Roles = roles;
 
             return View("AddUser", model);
         }
